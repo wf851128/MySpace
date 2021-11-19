@@ -1,0 +1,33 @@
+package logic
+
+import (
+	"MySpace/dao/mysql"
+	"MySpace/models"
+	"MySpace/pkg/snowflake"
+)
+
+func SignUp(p *models.ParamSignUp) (err error) {
+	//	判断用户是否存在
+	err = mysql.CheckUserExits(p.UserName)
+	if err != nil {
+		return err
+	}
+	//	生成 uid
+	userID := snowflake.GenID()
+	//构造一个 user 实例
+	user := &models.User{
+		UserID:   userID,
+		UserName: p.UserName,
+		Password: p.Password,
+	}
+	//	保存至数据库
+	return mysql.InsertUser(user)
+}
+
+func Login(p *models.ParamLogin) (err error) {
+	//	判断用户是否存在
+	if err = mysql.Login(p); err != nil {
+		return err
+	}
+	return
+}

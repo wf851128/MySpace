@@ -1,0 +1,31 @@
+app:
+ name: "MySpace"
+ mode: "dev"
+ port: 8081
+ version: "V0.01"
+ start_time: "2020-02-02"
+ machine_id: 027
+ secret: "figo"
+
+log:
+ level: "debug"
+ file_name: "MySpace.log"
+ max_size: 200
+ max_age: 30
+ max_backup: 7
+
+mysql:
+ host: "127.0.0.1"
+ port: 3306
+ user: "wangfei"
+ password: "titan721"
+ db_name: "MySpace"
+ max_open_conn: 200
+ max_id_conn: 50
+
+redis:
+ host: "127.0.0.1"
+ port: 6379
+ db: 0
+ password: ""
+ pool_size: 100
