@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-const UseridKey = "userID"
-
 func JWTAuthorizationMiddleware() func(context *gin.Context) {
 	return func(context *gin.Context) {
 		//	通常 token 存放在1.请求头 2.请求体 3.URL
@@ -34,7 +32,7 @@ func JWTAuthorizationMiddleware() func(context *gin.Context) {
 			return
 		}
 		//将当前请求的 userID 保存到请求上下文context上
-		context.Set(UseridKey, mc.UserID)
+		context.Set(controllers.UseridKey, mc.UserID)
 		//后续处理可以通过 context.get(UseridKey)来获取当前请求用户信息
 		context.Next()
 	}
