@@ -9,6 +9,9 @@ const (
 	CodeUserNotExist                                    //用户名不存在
 	CodeInvalidUserNameOrPassword                       //用户名或者密码错误
 	CodeServerBusy                                      //服务繁忙
+
+	CodeNeedLogin    //需要登录
+	CodeInvalidToken //无效 token
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -18,6 +21,9 @@ var codeMsgMap = map[ResCode]string{
 	CodeUserNotExist:              "用户名不存在",
 	CodeInvalidUserNameOrPassword: "用户名或密码错误",
 	CodeServerBusy:                "服务繁忙",
+
+	CodeNeedLogin:    "需要登录",
+	CodeInvalidToken: "无效 author",
 }
 
 func (c ResCode) Msg() string {
