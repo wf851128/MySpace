@@ -32,7 +32,7 @@ func ResponseErrorWithMsg(c *gin.Context, code ResCode, msg interface{}) {
 }
 
 // ResponseSuccess 请求成功应答
-func ResponseSuccess(c *gin.Context, data interface{}) {
+func ResponseSuccess(c *gin.Context, data ...interface{}) {
 
 	c.JSON(http.StatusOK, &ResponseData{
 		Code: CodeSuccess,

@@ -6,21 +6,21 @@ import (
 )
 
 func TestGoSnowflake(t *testing.T) {
-	token, err := GenToken(1122, "1")
+	aToken, rToken, err := GenToken(1122, "1")
 	if err != nil {
 		t.Error("err>>>：", err)
 	}
-	fmt.Printf("%s\n：\n", token)
-	fmt.Println(ParseToken(token))
+	fmt.Printf("aToken :%s \n rToken: %s ", aToken, rToken)
+	fmt.Println(ParseToken(aToken))
 }
 
 func BenchmarkJwt(b *testing.B) {
-	token, err := GenToken(1122, "1")
+	aToken, rToken, err := GenToken(1122, "1")
 	if err != nil {
 		b.Error("err>>>：", err)
 	}
 	for i := 0; i < b.N; i++ {
-		fmt.Printf("%s\n：\n", token)
-		fmt.Println(ParseToken(token))
+		fmt.Printf("aToken :%s \n rToken: %s ", aToken, rToken)
+		fmt.Println(ParseToken(aToken))
 	}
 }

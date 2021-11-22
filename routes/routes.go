@@ -21,7 +21,9 @@ func Setup(mode string) (g *gin.Engine) {
 	r.POST("/signup", controllers.SignUpHandler)
 	//登录业务
 	r.POST("/login", controllers.LoginHandler)
-
+	//刷新aToken
+	r.POST("/refresh", controllers.RefreshTokenHandler)
+	//验证 token
 	r.POST("/ping", middlewares.JWTAuthorizationMiddleware(), func(context *gin.Context) {
 		//判断请求头中是否有有效的 JWT token
 		context.String(http.StatusOK, "pong")
