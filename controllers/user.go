@@ -45,7 +45,7 @@ func SignUpHandler(context *gin.Context) {
 }
 
 func LoginHandler(context *gin.Context) {
-	var p *models.ParamLogin
+	var p *models.User
 	//	获取请求参数及参数校验
 	if err := context.ShouldBindJSON(&p); err != nil {
 		//log 中记录错误信息
@@ -62,7 +62,7 @@ func LoginHandler(context *gin.Context) {
 		}
 	}
 	//	业务逻辑处理
-	err := logic.Login(p)
+	token, err := logic.Login(p)
 	if err != nil {
 		//登录失败
 		zap.L().Error("controllers.LoginHandler.Login error,",
@@ -76,7 +76,7 @@ func LoginHandler(context *gin.Context) {
 		ResponseError(context, CodeInvalidUserNameOrPassword)
 	} else {
 		//登录成功
-		ResponseSuccess(context, nil)
+		ResponseSuccess(context, token)
 	}
 
 }

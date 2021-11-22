@@ -15,13 +15,13 @@ type Config struct {
 	*RedisConfig `mapstructure:"redis"`
 }
 type AppConfig struct {
-	Name      string `mapstructure:"name"`
-	Mode      string `mapstructure:"mode"`
-	Port      int    `mapstructure:"port"`
-	Version   string `mapstructure:"version"`
-	StartTime string `mapstructure:"start_time"`
-	MachineID int64  `mapstructure:"machine_id"`
-	Secret    string `mapstructure:"secret"`
+	Name              string `mapstructure:"name"`
+	Mode              string `mapstructure:"mode"`
+	Port              int    `mapstructure:"port"`
+	Version           string `mapstructure:"version"`
+	StartTime         string `mapstructure:"start_time"`
+	MachineID         int64  `mapstructure:"machine_id"`
+	PasswordSecretKey string `mapstructure:"password_secret"`
 }
 
 type LogConfig struct {

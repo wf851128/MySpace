@@ -45,11 +45,11 @@ func InsertUser(user *models.User) (err error) {
 }
 func md5Password(oPassword string) string {
 	h := md5.New()
-	h.Write([]byte(settings.Conf.AppConfig.Secret))
+	h.Write([]byte(settings.Conf.AppConfig.PasswordSecretKey))
 	return hex.EncodeToString(h.Sum([]byte(oPassword)))
 }
 
-func Login(p *models.ParamLogin) (err error) {
+func Login(p *models.User) (err error) {
 	//用户输入的密码
 	oPassword := p.Password
 	sqlStr := `select username,password from user where username = ?`

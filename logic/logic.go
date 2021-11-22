@@ -3,6 +3,7 @@ package logic
 import (
 	"MySpace/dao/mysql"
 	"MySpace/models"
+	"MySpace/pkg/jwt"
 	"MySpace/pkg/snowflake"
 )
 
@@ -24,10 +25,18 @@ func SignUp(p *models.ParamSignUp) (err error) {
 	return mysql.InsertUser(user)
 }
 
-func Login(p *models.ParamLogin) (err error) {
-	//	判断用户是否存在
-	if err = mysql.Login(p); err != nil {
-		return err
+func Login(p *models.User) (token string, err error) {
+	user := &models.User{
+		UserName: p.UserName,
+		Password: p.Password,
 	}
-	return
+	//	判断用户是否存在
+	if err = mysql.Login(user); err != nil {
+		return "", err
+	}
+	//用户存在的情况下，生成 token
+	if err != nil {
+		return "", err
+	}
+	return jwt.GenToken(p.UserID, p.UserName)
 }

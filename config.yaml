@@ -5,7 +5,6 @@ app:
  version: "V0.01"
  start_time: "2020-02-02"
  machine_id: 027
- secret: "figo"
 
 log:
  level: "debug"
