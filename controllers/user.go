@@ -14,7 +14,7 @@ import (
 
 // SignUpHandler 用户注册
 func SignUpHandler(context *gin.Context) {
-	var p models.ParamSignUp
+	var p = new(models.ParamSignUp)
 	//	参数校验
 	if err := context.ShouldBindJSON(&p); err != nil {
 		//log 中记录错误信息
@@ -33,7 +33,7 @@ func SignUpHandler(context *gin.Context) {
 	}
 	//	请求参数有误,进行异常处理
 	//	业务处理
-	err := logic.SignUp(&p)
+	err := logic.SignUp(p)
 	if err != nil {
 		if errors.Is(err, mysql.ErrorUserExist) {
 			ResponseError(context, CodeUserExist)
@@ -48,7 +48,7 @@ func SignUpHandler(context *gin.Context) {
 
 // LoginHandler 用户登录
 func LoginHandler(context *gin.Context) {
-	var p models.User
+	var p = new(models.User)
 	//	获取请求参数及参数校验
 	if err := context.ShouldBindJSON(&p); err != nil {
 		//log 中记录错误信息
@@ -65,7 +65,7 @@ func LoginHandler(context *gin.Context) {
 		}
 	}
 	//	业务逻辑处理
-	aToken, rToken, err := logic.Login(&p)
+	aToken, rToken, err := logic.Login(p)
 	if err != nil {
 		//登录失败
 		zap.L().Error("controllers.LoginHandler.Login error,",
@@ -84,7 +84,8 @@ func LoginHandler(context *gin.Context) {
 }
 
 func RefreshTokenHandler(context *gin.Context) {
-	var p models.RefreshToken
+	var p = new(models.RefreshToken)
+
 	//	获取参数
 	if err := context.ShouldBindJSON(&p); err != nil {
 		//log 中记录错误信息
